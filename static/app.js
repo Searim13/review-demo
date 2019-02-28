@@ -5,9 +5,9 @@ function buildCharts(newSample) {
 		console.log(pie_data);
 
 		var data = [{
-		  values: pie_data.map(r => r.value),
-		  labels: pie_data.map(r => r.otu_label),
-		  text: pie_data.map(r => r.otu_id),
+		  values: pie_data.map(r => r.value).slice(0, 10),
+		  labels: pie_data.map(r => r.otu_label).slice(0, 10),
+		  text: pie_data.map(r => r.otu_id).slice(0, 10),
 		  type: 'pie'
 		}];
 
@@ -16,6 +16,31 @@ function buildCharts(newSample) {
 		};
 
 		Plotly.newPlot('pie', data, layout);
+
+
+		var trace1 = {
+		  x: pie_data.map(r => r.otu_id),
+		  y: pie_data.map(r => r.value),
+		  text: pie_data.map(r => r.otu_label),
+		  mode: 'markers',
+		  marker: {
+		    size: pie_data.map(r => r.value),
+		    color: pie_data.map(r => r.otu_id),
+		    colorscale: "Earth"
+		  }
+		};
+
+		var data = [trace1];
+
+		var layout = {
+		  title: 'Fancy Bubbles',
+		  showlegend: false,
+		  height: 600,
+		};
+
+		Plotly.newPlot('bubble', data, layout);
+
+
 
 	});
 }

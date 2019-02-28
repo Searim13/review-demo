@@ -43,7 +43,7 @@ def get_all_samples():
 @app.route('/sample_detail/<sample_id>')
 def get_sample_detail(sample_id):
 	cols = ['otu_id', 'otu_label', sample_id]
-	return df_samples[cols].sort_values(sample_id, ascending=False).head(10).rename(columns={sample_id: "value"}).to_json(orient='records')
+	return df_samples[cols].sort_values(sample_id, ascending=False).rename(columns={sample_id: "value"}).to_json(orient='records')
 
 @app.route('/')
 def index():
